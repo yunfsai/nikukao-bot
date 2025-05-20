@@ -17,8 +17,17 @@ client.on('messageCreate', message => {
   if (message.author.bot) return;
 
   if (message.content.includes('にくかおくん')) {
-    message.channel.send('なんだろ');
+    const responses = [
+      "なんだろ",
+      "よんだかな",
+      "はい",
+      "なにかな",
+      "なんかようかな"
+    ];
+    const randomIndex = Math.floor(Math.random() * responses.length);
+    message.channel.send(responses[randomIndex]);
   }
 });
+
 
 client.login(process.env.DISCORD_TOKEN);
