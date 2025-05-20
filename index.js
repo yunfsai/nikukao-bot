@@ -17,7 +17,7 @@ client.on('messageCreate', message => {
   if (message.author.bot) return;
 
   if (message.content.includes('にくかおくん')) {
-    message.reply('なんだろ');
+    message.channel.send('なんだろ');
   }
 });
 
