@@ -1,5 +1,13 @@
 const { Client, GatewayIntentBits } = require('discord.js');
+const fs = require('fs'); // ←追加
 require('dotenv').config();
+
+const getRandomResponse = (path) => {
+  const data = fs.readFileSync(path, 'utf8');
+  const lines = JSON.parse(data);
+  const i = Math.floor(Math.random() * lines.length);
+  return lines[i];
+};
 
 const client = new Client({
   intents: [
@@ -17,30 +25,13 @@ client.on('messageCreate', message => {
   if (message.author.bot) return;
 
   if (message.content.includes('にくかおくん')) {
-    const responses = [
-      "なんだろ",
-      "よんだかな",
-      "はい",
-      "なにかな",
-      "なんかようかな"
-    ];
-    const randomIndex = Math.floor(Math.random() * responses.length);
-    message.channel.send(responses[randomIndex]);
-    return; // ← ここで終わらせておくと「ダブル反応」防止！
+    message.channel.send(getRandomResponse('./responses.json'));
+    return;
   }
 
-  // それ以外は一定確率で「相槌」
-  if (Math.random() < 0.2) { // ← 20%の確率（お好みで調整！）
-    const aizuchi = [
-      "はえ～",
-      "ここから下↓フィーバータイム",
-      "なるほどね",
-      "楽しいことをかんがえよ",
-      "あえ～",
-      "ためになるね",
-      "お前はもう、死んでいる"
-    ];
-    const randomIndex = Math.floor(Math.random() * aizuchi.length);
-    message.channel.send(aizuchi[randomIndex]);
+  if (Math.random() < 0.2) {
+    message.channel.send(getRandomResponse('./aizuchi.json'));
   }
-});client.login(process.env.DISCORD_TOKEN);
+});
+
+client.login(process.env.DISCORD_TOKEN);
