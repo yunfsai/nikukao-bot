@@ -26,8 +26,21 @@ client.on('messageCreate', message => {
     ];
     const randomIndex = Math.floor(Math.random() * responses.length);
     message.channel.send(responses[randomIndex]);
+    return; // ← ここで終わらせておくと「ダブル反応」防止！
   }
-});
 
-
-client.login(process.env.DISCORD_TOKEN);
+  // それ以外は一定確率で「相槌」
+  if (Math.random() < 0.2) { // ← 20%の確率（お好みで調整！）
+    const aizuchi = [
+      "はえ～",
+      "ここから下↓フィーバータイム",
+      "なるほどね",
+      "楽しいことをかんがえよ",
+      "あえ～",
+      "ためになるね",
+      "お前はもう、死んでいる"
+    ];
+    const randomIndex = Math.floor(Math.random() * aizuchi.length);
+    message.channel.send(aizuchi[randomIndex]);
+  }
+});client.login(process.env.DISCORD_TOKEN);
