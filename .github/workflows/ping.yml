@@ -2,7 +2,7 @@ name: Keep Render Awake
 
 on:
   schedule:
-    - cron: "*/15 * * * *" # ← 15分ごとに実行
+    - cron: "*/20 * * * *" # ← 15分ごとに実行
 
 jobs:
   ping:
