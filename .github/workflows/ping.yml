@@ -1,0 +1,12 @@
+name: Keep Render Awake
+
+on:
+  schedule:
+    - cron: "*/15 * * * *" # ← 15分ごとに実行
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl render
+        run: curl https://nikukao-bot.onrender.com/
