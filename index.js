@@ -29,7 +29,7 @@ client.on('messageCreate', message => {
     return;
   }
 
-  if (Math.random() < 0.2) {
+  if (Math.random() < 0.15) {
     message.channel.send(getRandomResponse('./aizuchi.json'));
   }
 });
